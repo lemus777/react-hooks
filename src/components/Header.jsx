@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
+import '../styles/header.css';
 
 const Header = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -12,9 +13,12 @@ const Header = () => {
 
   return (
     <div className="Header">
-      <h1>React Hooks</h1>
-      <button type='button' onClick={handleClick} className='buttonToggle'>{darkMode ? 'Light mode' : 'Dark mode'}</button>
-      {/*<button type='button' onClick={() => setDarkMode(!darkMode)}>{darkMode ? 'Dark mode 2' : 'Light mode 2'}</button>*/}
+      <div className="title">
+        <h1>React Hooks</h1>
+      </div>
+      <div className="themeButton">
+        <button type='button' onClick={handleClick} className='buttonToggle'>{darkMode ? 'Light mode' : 'Dark mode'}</button>
+      </div>
     </div>
   );
 }

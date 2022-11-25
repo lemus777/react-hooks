@@ -1,0 +1,20 @@
+.Header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  margin-left: 16px;
+}
+
+.themeButton {
+  margin: 32px 16px 0 0;
+}
+
+.buttonToggle {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  padding: 4px;
+  border: solid 2px gray;
+  border-radius: 4px;
+}
