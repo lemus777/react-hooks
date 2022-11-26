@@ -1,10 +1,13 @@
-import { useState, useEffect, useReducer, useMemo, useRef, useCallback } from "react";
+import { useState, useReducer, useMemo, useRef, useCallback } from "react";
+import { useCharacters } from "../hooks/useCharacters";
 import { Search } from "./Search";
-import '../styles/characters.css';
+import '../styles/Characters.css';
 
 const initialState = { // estado inicial que usará el reducer para agregar a favoritos
   favorites: []
 }
+
+const API = 'https://rickandmortyapi.com/api/character/'
 
 const favoriteReducer = (state, action) => { // reducer que agregará a favoritos
   switch (action.type) {
@@ -26,16 +29,11 @@ const favoriteReducer = (state, action) => { // reducer que agregará a favorito
 }
 
 const Characters = () => {
-  const [characters, setCharacters] = useState([]);
   const [favorites, dispatch] = useReducer(favoriteReducer, initialState);
   const [search, setSearch] = useState('');
   const searchInput = useRef(null);
 
-  useEffect(() => {
-    fetch('https://rickandmortyapi.com/api/character/')
-    .then(response => response.json())
-    .then(data => setCharacters(data.results))
-  }, []) // el array vacío hace que solo se ejecute la primera vez
+  const characters = useCharacters(API);
 
   const handleClick = favorite => { // lógica para agregar a favoritos
     dispatch({ type: 'ADD_TO_FAVORITE', payload: favorite })

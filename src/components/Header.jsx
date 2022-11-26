@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
-import '../styles/header.css';
+import '../styles/Header.css';
 
 const Header = () => {
   const [darkMode, setDarkMode] = useState(false);
