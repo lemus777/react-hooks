@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from "react";
+import { useState, useEffect, useReducer, useMemo } from "react";
 import '../styles/characters.css';
 
 const initialState = { // estado inicial que usará el reducer para agregar a favoritos
@@ -27,6 +27,7 @@ const favoriteReducer = (state, action) => { // reducer que agregará a favorito
 const Characters = () => {
   const [characters, setCharacters] = useState([]);
   const [favorites, dispatch] = useReducer(favoriteReducer, initialState);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     fetch('https://rickandmortyapi.com/api/character/')
@@ -40,25 +41,43 @@ const Characters = () => {
 
   const handleClickRemove = (id) => {
     dispatch({ type: 'REMOVE_FAVORITE', payload: id })
-}
+  }
+
+  const handleSearch = (event) => {
+    setSearch(event.target.value)
+  }
+
+  // const filteredUsers = characters.filter((user) => {
+  //   return user.name.toLowerCase().includes(search.toLowerCase());
+  // })
+
+  const filteredUsers = useMemo(() =>
+    characters.filter((user) => {
+      return user.name.toLowerCase().includes(search.toLowerCase());
+    }),
+      [characters, search]
+  )
 
   return (
     <div className="container">
 
-        <div className="favorites">
-          <h3>Favorites</h3>
-          <div className="favorites-list">
-            {favorites.favorites.map(favorite => ( // mostrará los favoritos
-              <li key={favorite.id}>
-                <img src={favorite.image} alt={favorite.name} />
-              </li>
-            ))}
-          </div>
+      <div className="favorites">
+        <h3>Favorites</h3>
+        <div className="favorites-list">
+          {favorites.favorites.map(favorite => ( // mostrará los favoritos
+            <li key={favorite.id}>
+              <img src={favorite.image} alt={favorite.name} />
+            </li>
+          ))}
         </div>
+      </div>
+
+      <div className="search">
+        <input type='text' value={search} onChange={handleSearch} />
+      </div>
 
       <div className="Characters">
-
-        {characters.map(character => (
+        {filteredUsers.map(character => (
           <div className="character-container" key={character.id}>
             <img src={character.image} alt={character.name} />
             <div className="character-text">

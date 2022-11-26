@@ -56,25 +56,26 @@
   background-color: rgba(0,0,0,0.5);
   color: white;
   cursor: pointer;
+  border: none;
   border-radius: 8px;
   margin: 0 8px;
 }
 
 .status-alive {
   background-color: green;
-  max-width: 70px;
+  /*max-width: 70px;*/
   border-radius: 8px;
 }
 
 .status-dead {
   background-color: red;
-  max-width: 70px;
+  /*max-width: 70px;*/
   border-radius: 8px;
 }
 
 .status-unknown {
   background-color: #505050;
-  max-width: 80px;
+  /*max-width: 80px;*/
   border-radius: 8px;
 }
 
