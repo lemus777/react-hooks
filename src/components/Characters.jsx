@@ -8,9 +8,16 @@ const initialState = { // estado inicial que usará el reducer para agregar a fa
 const favoriteReducer = (state, action) => { // reducer que agregará a favoritos
   switch (action.type) {
     case 'ADD_TO_FAVORITE':
+      const isExist = state.favorites.find(item => item.id === action.payload.id)
+        if (isExist) return { ...state }
       return {
         ...state,
         favorites: [...state.favorites, action.payload]
+      };
+    case 'REMOVE_FAVORITE':
+      return {
+          ...state,
+          favorites: state.favorites.filter(items => items.id !== action.payload)
       };
     default:
       return state;
@@ -31,16 +38,22 @@ const Characters = () => {
     dispatch({ type: 'ADD_TO_FAVORITE', payload: favorite })
   }
 
+  const handleClickRemove = (id) => {
+    dispatch({ type: 'REMOVE_FAVORITE', payload: id })
+}
+
   return (
     <div className="container">
 
         <div className="favorites">
-          <h3>Favorites: </h3>
-          {favorites.favorites.map(favorite => ( // mostrará los favoritos
-            <li key={favorite.id}>
-              <img src={favorite.image} alt={favorite.name} />
-            </li>
-          ))}
+          <h3>Favorites</h3>
+          <div className="favorites-list">
+            {favorites.favorites.map(favorite => ( // mostrará los favoritos
+              <li key={favorite.id}>
+                <img src={favorite.image} alt={favorite.name} />
+              </li>
+            ))}
+          </div>
         </div>
 
       <div className="Characters">
@@ -49,11 +62,13 @@ const Characters = () => {
           <div className="character-container" key={character.id}>
             <img src={character.image} alt={character.name} />
             <div className="character-text">
-              <p>{character.name}</p>
-              <p>{character.status}</p>
-              <p>{character.species}</p>
-              <p>{character.gender}</p>
+              <h3>{character.name}</h3>
+              <p className=
+                {character.status === 'Alive' ? 'status-alive' : (character.status === 'Dead' ? 'status-dead' : 'status-unknown')
+              }>{character.status}</p>
+              <p>{character.species} {character.gender}</p>
               <button type="button" onClick={() => handleClick(character)} >Agregar a favoritos</button>
+              <button type="button" onClick={() => handleClickRemove(character.id)} >Quitar de favoritos</button>
             </div>
           </div>
         ))}

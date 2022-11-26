@@ -1,4 +1,8 @@
-.favorites {
+.favorites h3 {
+  margin: 4px;
+}
+
+.favorites-list {
   display: flex;
   justify-content: center;
 }
@@ -22,10 +26,14 @@
 
 .character-container {
   width: 290px;
-  height: 420px;
+  height: 400px;
   background-color: rgba(0,0,0,0.5);
   margin: 4px;
   border-radius: 8px;
+}
+
+.character-container h3 {
+  margin: 4px;
 }
 
 .character-container img {
@@ -37,10 +45,37 @@
 
 .character-text {
   color: white;
+  justify-items: center;
 }
 
 .character-text p {
   margin: 4px;
+}
+
+.character-text button {
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  cursor: pointer;
+  border-radius: 8px;
+  margin: 0 8px;
+}
+
+.status-alive {
+  background-color: green;
+  max-width: 70px;
+  border-radius: 8px;
+}
+
+.status-dead {
+  background-color: red;
+  max-width: 70px;
+  border-radius: 8px;
+}
+
+.status-unknown {
+  background-color: #505050;
+  max-width: 80px;
+  border-radius: 8px;
 }
 
 @media (min-width: 600px) {
